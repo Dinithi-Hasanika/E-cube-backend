@@ -13,7 +13,7 @@ public interface UserDAO
 
     User saveUser(User user);
 
-    void deleteUser(int id);
+    void deleteUser(String userId);
 
     User updateUser(User user);
 }

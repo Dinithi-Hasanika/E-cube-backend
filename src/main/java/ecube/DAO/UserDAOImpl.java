@@ -34,12 +34,21 @@ public class UserDAOImpl implements UserDAO
 
     @Override public User saveUser( User user )
     {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        session.save( user );
+        transaction.commit();
+        return user;
     }
 
-    @Override public void deleteUser( int id )
+    @Override public void deleteUser( String userId )
     {
-
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Query deleteQuery = session.createQuery( "delete from User where userId=:userId" );
+        deleteQuery.setParameter( "userId",userId );
+        deleteQuery.executeUpdate();
+        transaction.commit();
     }
 
     @Override public User updateUser( User user )
